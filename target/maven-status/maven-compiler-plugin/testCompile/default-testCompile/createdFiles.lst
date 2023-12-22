@@ -1,0 +1,7 @@
+test/Skip_TestR2RMLFLinkedData.class
+test/TestR2RML.class
+test/TestR2RMLCSV.class
+test/TestR2RMLF.class
+test/TestSQL.class
+test/Skip_TestR2RMLMySQL.class
+test/TestR2RMLConstants.class
