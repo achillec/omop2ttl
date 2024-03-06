@@ -80,7 +80,7 @@ map:condition_occurrence rr:logicalTable [rr:tableName "mimicredux.condition_occ
   ], [
     rr:objectMap [
       rr:column "condition_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <condition_occurrence#condition_source_value>
   ], [
@@ -125,7 +125,7 @@ map:condition_occurrence rr:logicalTable [rr:tableName "mimicredux.condition_occ
   ], [
     rr:objectMap [
       rr:column "condition_status_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <condition_occurrence#condition_status_source_value>
   ], [
@@ -180,7 +180,7 @@ map:device_exposure rr:logicalTable [rr:tableName "mimicredux.device_exposure"];
   ], [
     rr:objectMap [
       rr:column "device_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <device_exposure#device_source_value>
   ], [
@@ -208,11 +208,29 @@ map:device_exposure rr:logicalTable [rr:tableName "mimicredux.device_exposure"];
     ];
     rr:predicate <device_exposure#device_exposure_end_datetime>
   ], [
+    rr:objectMap [
+      rr:column "production_id";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <device_exposure#production_id>
+  ], [
+    rr:objectMap [
+      rr:column "unit_source_value";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <device_exposure#unit_source_value>
+  ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_detail/{visit_detail_id}"];
     rr:predicate <device_exposure#visit_detail_id>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{device_type_concept_id}"];
     rr:predicate <device_exposure#device_type_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{unit_concept_id}"];
+    rr:predicate <device_exposure#unit_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{unit_source_concept_id}"];
+    rr:predicate <device_exposure#unit_source_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/device_exposure>;
@@ -233,17 +251,11 @@ map:note rr:logicalTable [rr:tableName "mimicredux.note"];
     ];
     rr:predicate rdfs:label
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/provider/{provider_id}"];
-    rr:predicate <note#provider>
-  ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{encoding_concept_id}"];
-    rr:predicate <note#encoding_concept_id>
-  ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{language_concept_id}"];
-    rr:predicate <note#language_concept_id>
-  ], [
-    rr:objectMap [rr:template "http://localhost:2020/person/{person_id}"];
-    rr:predicate <note#person_id>
+    rr:objectMap [
+      rr:column "note_datetime";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <note#note_datetime>
   ], [
     rr:objectMap [
       rr:column "note_title";
@@ -257,23 +269,41 @@ map:note rr:logicalTable [rr:tableName "mimicredux.note"];
     ];
     rr:predicate <note#note_text>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{note_type_concept_id}"];
-    rr:predicate <note#note_type_concept_id>
-  ], [
     rr:objectMap [
-      rr:column "note_datetime";
+      rr:column "note_source_value";
       rr:termType rr:Literal
     ];
-    rr:predicate <note#note_datetime>
+    rr:predicate <note#note_source_value>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_occurrence/{visit_occurrence_id}"];
     rr:predicate <note#visit_occurrence_id>
   ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{note_type_concept_id}"];
+    rr:predicate <note#note_type_concept_id>
+  ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_detail/{visit_detail_id}"];
     rr:predicate <note#visit_detail_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{device_type_concept_id}"];
-    rr:predicate <note#device_type_concept_id>
+    rr:objectMap [rr:template "http://localhost:2020/concept/{note_class_concept_id}"];
+    rr:predicate <note#note_class_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/provider/{provider_id}"];
+    rr:predicate <note#provider>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{encoding_concept_id}"];
+    rr:predicate <note#encoding_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{language_concept_id}"];
+    rr:predicate <note#language_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/person/{person_id}"];
+    rr:predicate <note#person_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/note/{note_event_id}"];
+    rr:predicate <note#note_event_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/note/{note_event_field_concept_id}"];
+    rr:predicate <note#note_event_field_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/note>;
@@ -400,25 +430,25 @@ map:specimen rr:logicalTable [rr:tableName "mimicredux.specimen"];
   ],  [
     rr:objectMap [
       rr:column "specimen_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <specimen#specimen_source_value>
   ], [
     rr:objectMap [
       rr:column "unit_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <specimen#unit_source_value>
   ], [
     rr:objectMap [
       rr:column "anatomic_site_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <specimen#anatomic_site_source_value>
   ], [
     rr:objectMap [
       rr:column "disease_status_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <specimen#disease_status_source_value>
   ], [
@@ -525,9 +555,30 @@ map:location rr:logicalTable [rr:tableName "mimicredux.location"];
   ], [
     rr:objectMap [
       rr:column "location_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <location#location_source_value>
+  ], [
+    rr:objectMap [
+      rr:column "country_source_value";
+      rr:datatype xsd:string
+    ];
+    rr:predicate <location#country_source_value>
+  ], [
+    rr:objectMap [
+      rr:column "latitude";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <location#latitude>
+  ], [
+    rr:objectMap [
+      rr:column "longitude";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <location#longitude>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{country_concept_id}"];
+    rr:predicate <location#country_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/location>;
@@ -550,13 +601,13 @@ map:care_site rr:logicalTable [rr:tableName "mimicredux.care_site"];
   ], [
     rr:objectMap [
       rr:column "care_site_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <care_site#care_site_source_value>
   ], [
     rr:objectMap [
       rr:column "place_of_service_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <care_site#place_of_service_source_value>
   ], [
@@ -605,19 +656,19 @@ map:provider rr:logicalTable [rr:tableName "mimicredux.provider"];
   ], [
     rr:objectMap [
       rr:column "provider_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <provider#provider_source_value>
   ], [
     rr:objectMap [
       rr:column "specialty_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <provider#specialty_source_value>
   ], [
     rr:objectMap [
       rr:column "gender_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <provider#gender_source_value>
   ], [
@@ -751,6 +802,9 @@ map:note_nlp rr:logicalTable [rr:tableName "mimicredux.note_nlp"];
   ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{note_nlp_concept_id}"];
     rr:predicate <note_nlp#note_nlp_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{note_nlp_source_concept_id}"];
+    rr:predicate <note_nlp#note_nlp_source_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/note_nlp>;
@@ -949,18 +1003,18 @@ map:concept_ancenstor rr:logicalTable [rr:tableName "mimicredux.concept_ancestor
       rr:termType rr:Literal
     ];
     rr:predicate rdfs:label
-#  ], [
-#    rr:objectMap [
-#      rr:column "min_levels_of_separation";
-#      rr:termType rr:Literal
-#    ];
-#    rr:predicate <concept_ancenstor#min_levels_of_separation>
-#  ], [
-#    rr:objectMap [
-#      rr:column "max_levels_of_separation";
-#      rr:termType rr:Literal
-#    ];
-#    rr:predicate <concept_ancenstor#max_levels_of_separation>
+  ], [
+    rr:objectMap [
+      rr:column "min_levels_of_separation";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <concept_ancenstor#min_levels_of_separation>
+  ], [
+    rr:objectMap [
+      rr:column "max_levels_of_separation";
+      rr:termType rr:Literal
+    ];
+    rr:predicate <concept_ancenstor#max_levels_of_separation>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{descendant_concept_id}"];
     rr:predicate <concept_ancenstor#concept_id>
@@ -1077,6 +1131,9 @@ map:cdm_source rr:logicalTable [rr:tableName "mimicredux.cdm_source"];
       rr:termType rr:Literal
     ];
     rr:predicate <cdm_source#vocabulary_version>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{cdm_version_concept_id}"];
+    rr:predicate <cdm_source#cdm_version_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/cdm_source>;
@@ -1211,13 +1268,13 @@ map:cost rr:logicalTable [rr:tableName "mimicredux.cost"];
   ], [
     rr:objectMap [
       rr:column "revenue_code_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <cost#revenue_code_source_value>
   ], [
     rr:objectMap [
       rr:column "drg_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <cost#drg_source_value>
   ], [
@@ -1263,31 +1320,31 @@ map:payer_plan_period rr:logicalTable [rr:tableName "mimicredux.payer_plan_perio
   ], [
     rr:objectMap [
       rr:column "payer_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <payer_plan_period#payer_source_value>
   ], [
     rr:objectMap [
       rr:column "plan_source_value";
-      rr:termType rr:Literal
+       rr:datatype xsd:string
     ];
     rr:predicate <payer_plan_period#plan_source_value>
   ], [
     rr:objectMap [
       rr:column "sponsor_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <payer_plan_period#sponsor_source_value>
   ], [
     rr:objectMap [
       rr:column "family_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <payer_plan_period#family_source_value>
   ], [
     rr:objectMap [
       rr:column "stop_reason_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <payer_plan_period#stop_reason_source_value>
   ], [
@@ -1345,7 +1402,7 @@ map:drug_exposure rr:logicalTable [rr:tableName "mimicredux.drug_exposure"];
   ], [
     rr:objectMap [
       rr:column "drug_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <drug_exposure#drug_source_value>
   ], [
@@ -1360,7 +1417,7 @@ map:drug_exposure rr:logicalTable [rr:tableName "mimicredux.drug_exposure"];
   ], [
     rr:objectMap [
       rr:column "dose_unit_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <drug_exposure#dose_unit_source_value>
   ], [
@@ -1423,7 +1480,7 @@ map:drug_exposure rr:logicalTable [rr:tableName "mimicredux.drug_exposure"];
   ], [
     rr:objectMap [
       rr:column "route_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <drug_exposure#route_source_value>
   ], [
@@ -1472,13 +1529,13 @@ map:observation rr:logicalTable [rr:tableName "mimicredux.observation"];
   ], [
     rr:objectMap [
       rr:column "observation_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <observation#observation_source_value>
   ], [
     rr:objectMap [
       rr:column "unit_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <observation#unit_source_value>
   ], [
@@ -1493,7 +1550,7 @@ map:observation rr:logicalTable [rr:tableName "mimicredux.observation"];
   ], [
     rr:objectMap [
       rr:column "qualifier_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <observation#qualifier_source_value>
   ], [
@@ -1518,6 +1575,12 @@ map:observation rr:logicalTable [rr:tableName "mimicredux.observation"];
     ];
     rr:predicate <observation#unit_concept_id>
   ], [
+    rr:objectMap [
+      rr:column "value_source_value";
+      rr:datatype xsd:string
+    ];
+    rr:predicate <observation#value_source_value>
+  ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{value_as_concept_id}"];
     rr:predicate <observation#value_as_concept_id>
   ], [
@@ -1526,6 +1589,12 @@ map:observation rr:logicalTable [rr:tableName "mimicredux.observation"];
   ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_occurrence/{visit_occurrence_id}"];
     rr:predicate <observation#visit_occurrence_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/concept/{obs_event_field_concept_id}"];
+    rr:predicate <observation#obs_event_field_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/observation/{observation_event_id}"];
+    rr:predicate <observation#observation_event_id>
   ], [
     rr:objectMap [
       rr:template "{observation_id}";
@@ -1580,7 +1649,7 @@ map:person rr:logicalTable [rr:tableName "mimicredux.person"];
   ], [
     rr:objectMap [
       rr:column "ethnicity_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <person#ethnicity_source_value>
   ], [
@@ -1592,7 +1661,7 @@ map:person rr:logicalTable [rr:tableName "mimicredux.person"];
   ], [
     rr:objectMap [
       rr:column "person_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <person#person_source_value>
   ], [
@@ -1604,7 +1673,7 @@ map:person rr:logicalTable [rr:tableName "mimicredux.person"];
   ], [
     rr:objectMap [
       rr:column "gender_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <person#gender_source_value>
   ], [
@@ -1616,7 +1685,7 @@ map:person rr:logicalTable [rr:tableName "mimicredux.person"];
   ], [
     rr:objectMap [
       rr:column "race_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <person#race_source_value>
   ], [
@@ -1692,13 +1761,13 @@ map:procedure_occurrence rr:logicalTable [rr:tableName "mimicredux.procedure_occ
   ], [
     rr:objectMap [
       rr:column "procedure_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <procedure_occurrence#procedure_source_value>
   ], [
     rr:objectMap [
       rr:column "modifier_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <procedure_occurrence#modifier_source_value>
   ], [
@@ -1735,7 +1804,7 @@ map:visit_detail rr:logicalTable [rr:tableName "mimicredux.visit_detail"];
   rr:predicateObjectMap [
     rr:objectMap [
       rr:column "visit_detail_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <visit_detail#visit_detail_source_value>
   ], [
@@ -1743,10 +1812,10 @@ map:visit_detail rr:logicalTable [rr:tableName "mimicredux.visit_detail"];
     rr:predicate <visit_detail#visit_detail_source_concept_id>
   ], [
     rr:objectMap [
-      rr:column "admitting_source_value";
-      rr:termType rr:Literal
+      rr:column "admitted_from_source_value";
+      rr:datatype xsd:string
     ];
-    rr:predicate <visit_detail#admitting_source_value>
+    rr:predicate <visit_detail#admitted_from_source_value>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_occurrence/{visit_occurrence_id}"];
     rr:predicate <visit_detail#visit_occurrence_id>
@@ -1784,13 +1853,13 @@ map:visit_detail rr:logicalTable [rr:tableName "mimicredux.visit_detail"];
     rr:objectMap [rr:template "http://localhost:2020/concept/{visit_detail_concept_id}"];
     rr:predicate <visit_detail#visit_detail_concept_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{discharge_to_concept_id}"];
-    rr:predicate <visit_detail#discharge_to_concept_id>
+    rr:objectMap [rr:template "http://localhost:2020/concept/{discharged_to_concept_id}"];
+    rr:predicate <visit_detail#discharged_to_concept_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{admitting_source_concept_id}"];
-    rr:predicate <visit_detail#admitting_source_concept_id>
+    rr:objectMap [rr:template "http://localhost:2020/concept/{admitted_from_concept_id}"];
+    rr:predicate <visit_detail#admitted_from_concept_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/visit_detail/{visit_detail_parent_id}"];
+    rr:objectMap [rr:template "http://localhost:2020/visit_detail/{parent_visit_detail_id}"];
     rr:predicate <visit_detail#visit_detail_parent>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/visit_detail/{preceding_visit_detail_id}"];
@@ -1803,10 +1872,10 @@ map:visit_detail rr:logicalTable [rr:tableName "mimicredux.visit_detail"];
     rr:predicate <visit_detail#care_site_id>
   ], [
     rr:objectMap [
-      rr:column "discharge_to_source_value";
-      rr:termType rr:Literal
+      rr:column "discharged_to_source_value";
+      rr:datatype xsd:string
     ];
-    rr:predicate <visit_detail#discharge_to_source_value>
+    rr:predicate <visit_detail#discharged_to_source_value>
   ], [
     rr:objectMap [
       rr:column "visit_detail_start_date";
@@ -1847,19 +1916,19 @@ map:measurement rr:logicalTable [rr:tableName "mimicredux.measurement"];
   ], [
     rr:objectMap [
       rr:column "measurement_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <measurement#measurement_source_value>
   ], [
     rr:objectMap [
       rr:column "unit_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <measurement#unit_source_value>
   ], [
     rr:objectMap [
       rr:column "value_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <measurement#value_source_value>
   ], [
@@ -1910,6 +1979,12 @@ map:measurement rr:logicalTable [rr:tableName "mimicredux.measurement"];
   ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{measurement_source_concept_id}"];
     rr:predicate <measurement#measurement_source_concept_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/measurement/{measurement_event_id}"];
+    rr:predicate <measurement#measurement_event_id>
+  ], [
+    rr:objectMap [rr:template "http://localhost:2020/measurement/{meas_event_field_concept_id}"];
+    rr:predicate <measurement#meas_event_field_concept_id>
   ];
   rr:subjectMap [
     rr:class <http://localhost:2020/measurement>;
@@ -1934,10 +2009,10 @@ map:visit_occurrence rr:logicalTable [rr:tableName "mimicredux.visit_occurrence"
     rr:predicate <visit_occurrence#person_id>
   ], [
     rr:objectMap [
-      rr:column "discharge_to_source_value";
-      rr:termType rr:Literal
+      rr:column "discharged_to_source_value";
+      rr:datatype xsd:string
     ];
-    rr:predicate <visit_occurrence#discharge_to_source_value>
+    rr:predicate <visit_occurrence#discharged_to_source_value>
   ], [
     rr:objectMap [
       rr:column "visit_end_date";
@@ -1951,11 +2026,11 @@ map:visit_occurrence rr:logicalTable [rr:tableName "mimicredux.visit_occurrence"
     rr:objectMap [rr:template "http://localhost:2020/provider/{provider_id}"];
     rr:predicate <visit_occurrence#provider_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{discharge_to_concept_id}"];
-    rr:predicate <visit_occurrence#discharge_to_concept_id>
+    rr:objectMap [rr:template "http://localhost:2020/concept/{discharged_to_concept_id}"];
+    rr:predicate <visit_occurrence#discharged_to_concept_id>
   ], [
-    rr:objectMap [rr:template "http://localhost:2020/concept/{admitting_source_concept_id}"];
-    rr:predicate <visit_occurrence#admitting_source_concept_id>
+    rr:objectMap [rr:template "http://localhost:2020/concept/{admitted_from_concept_id}"];
+    rr:predicate <visit_occurrence#admitted_from_concept_id>
   ], [
     rr:objectMap [rr:template "http://localhost:2020/concept/{visit_type_concept_id}"];
     rr:predicate <visit_occurrence#visit_type_concept_id>
@@ -1976,14 +2051,14 @@ map:visit_occurrence rr:logicalTable [rr:tableName "mimicredux.visit_occurrence"
     rr:predicate <visit_occurrence#visit_start_datetime>
   ], [
     rr:objectMap [
-      rr:column "admitting_source_value";
-      rr:termType rr:Literal
+      rr:column "admitted_from_source_value";
+      rr:datatype xsd:string
     ];
-    rr:predicate <visit_occurrence#admitting_source_value>
+    rr:predicate <visit_occurrence#admitted_from_source_value>
   ], [
     rr:objectMap [
       rr:column "visit_source_value";
-      rr:termType rr:Literal
+      rr:datatype xsd:string
     ];
     rr:predicate <visit_occurrence#visit_source_value>
   ], [
